@@ -33,6 +33,7 @@ createApp({
             }
         ],    
         currentSlide: 0,
+        autoPlay: '',
     };
   },
   methods: {
@@ -56,5 +57,9 @@ createApp({
         // console.log(arg);
         this.currentSlide = arg;
     },
+  },
+  mounted() {
+    this.autoPlay = setInterval(this.next, 3_000);;
+
   },
 }).mount('#app');
