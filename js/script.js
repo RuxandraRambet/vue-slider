@@ -1,5 +1,5 @@
 'use strict';
-
+// destrutturazione createApp
 const { createApp } = Vue;
 
 createApp({
@@ -33,7 +33,7 @@ createApp({
             }
         ],    
         currentSlide: 0,
-        autoPlay: '',
+        autoPlay: null,
     };
   },
   methods: {
@@ -46,20 +46,33 @@ createApp({
         }
     },
     prev(){
-        // console.log('ho cliccato su next');
+        // console.log('ho cliccato su prev');
         this.currentSlide--;
 
         if(this.currentSlide < 0){
             this.currentSlide = this.slides.length - 1;
         }
     },
-    changeImage(arg){
-        // console.log(arg);
-        this.currentSlide = arg;
+    changeImage(index){
+        console.log(index);
+        this.currentSlide = index;
+    },
+    stopAutoPlay(){
+        clearInterval(this.autoPlay);
+    },
+    startAutoPlay(){
+        this.autoPlay = setInterval(this.next, 3_000);
     },
   },
-  mounted() {
-    this.autoPlay = setInterval(this.next, 3_000);;
 
+  mounted() {
+    //this.autoPlay = setInterval(this.next, 3_000);
+    this.startAutoPlay();
+
+    // Versione con arrow function
+    // setInterval(() => {
+    //     this.next();
+    // }, 3_000);
+    
   },
-}).mount('#app');
+}).mount('#app'); //app montata nel DOM
